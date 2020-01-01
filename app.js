@@ -4,33 +4,36 @@ class GroceryList extends React.Component {
 
   render() {
     return (
-      <ul>
+      <div>
+        <h2>Grocery List</h2>
+        <ul>
        {['Bananas', 'Chocolate'].map(item => <GroceryItem item={item} />)}
-      </ul>
+        </ul>
+      </div>
+
     );
   }
 
-);
+};
 
 class GroceryItem extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {done: false};
 
-    this.state = {
-      addToCart: false;
-    };
     this.handleClick = this.handleClick.bind(this);
     this.handleOnMouseEnter = this.handleOnMouseEnter.bind(this);
     this.handleOnMouseOut = this.handleOnMouseOut.bind(this);
   }
 
   handleClick(e) {
-    this.setState({addedToCart: !this.state.addedToCart});
+    this.setState(state => ({
+      done: !state.done
+    }))
   }
 
   handleOnMouseEnter(e) {
     e.target.style.fontWeight = 'bold';
-    e.target.style.cursor = 'pointer';
   }
 
   handleOnMouseOut(e) {
@@ -40,9 +43,12 @@ class GroceryItem extends React.Component {
   render() {
 
     let style = {
-      textDecoration: this.state.addedToCart ? 'line-through' : 'none'};
+      textDecoration: this.state.done ? 'line-through' : 'none'};
 
-      return <li style={style} onClick={this.handleClick} handleOnMouseEnter={this.handleOnMouseEnter} onMouseOut={this.handleOnMouseOut}>{this.props.item}</li>
+      return (
+        <li style={style} onClick={this.handleClick} onMouseEnter={this.handleOnMouseEnter} onMouseOut={this.handleOnMouseOut}>{this.props.item}
+        </li>
+      );
   }
 }
 
