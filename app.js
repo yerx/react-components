@@ -7,7 +7,7 @@ class GroceryList extends React.Component {
       <div>
         <h2>Grocery List</h2>
         <ul>
-       {['Bananas', 'Chocolate'].map(item => <GroceryItem item={item} />)}
+       {items.map(item => <GroceryItem item={item} />)}
         </ul>
       </div>
 
@@ -15,6 +15,8 @@ class GroceryList extends React.Component {
   }
 
 };
+
+const items = ['Bananas', 'Chocolate'];
 
 class GroceryItem extends React.Component {
   constructor(props) {
@@ -46,7 +48,7 @@ class GroceryItem extends React.Component {
       textDecoration: this.state.done ? 'line-through' : 'none'};
 
       return (
-        <li style={style} onClick={this.handleClick} onMouseEnter={this.handleOnMouseEnter} onMouseOut={this.handleOnMouseOut}>{this.props.item}
+        <li key={this.props.item} style={style} onClick={this.handleClick} onMouseEnter={this.handleOnMouseEnter} onMouseOut={this.handleOnMouseOut}>{this.props.item}
         </li>
       );
   }
